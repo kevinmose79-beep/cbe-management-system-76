@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>CBE Management System</title>
+    <meta name="description" content="School Management and CBE Examination Analysis System for managing learners, teachers, classes, exams, marks entry, automatic grading, ranking, and report generation." />
+    <meta property="og:title" content="CBE Management System" />
+    <meta property="og:description" content="School Management and CBE Examination Analysis System for managing learners, teachers, classes, exams, marks entry, automatic grading, ranking, and report generation." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=Inter:wght@400;500;600;700;800&family=Lato:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Merriweather:wght@400;700&family=Montserrat:wght@500;600;700;800&family=Open+Sans:ital,wght@0,400..700;1,400..700&family=Outfit:wght@500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Poppins:wght@500;600;700;800&family=Roboto:wght@400;500;700&family=Sora:wght@500;600;700;800&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&family=Space+Grotesk:wght@500;600;700&family=Urbanist:wght@400;500;600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=Inter:wght@400;500;600;700;800&family=Lato:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Merriweather:wght@400;700&family=Montserrat:wght@500;600;700;800&family=Open+Sans:ital,wght@0,400..700;1,400..700&family=Outfit:wght@500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Poppins:wght@500;600;700;800&family=Roboto:wght@400;500;700&family=Sora:wght@500;600;700;800&family=Source+Sans+3:ital,wght@0,400..700;1,400..700&family=Space+Grotesk:wght@500;600;700&family=Urbanist:wght@400;500;600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap">
+    </noscript>
+    <script>
+      (function() {
+        function send(payload) {
+          try {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/api/client-diagnostic', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify(payload));
+          } catch(e) {}
+        }
+
+        function showFatalFallback(message, detail) {
+          try {
+            var root = document.getElementById('root');
+            if (root && (!root.firstElementChild || root.querySelector('#pre-hydration-loader'))) {
+              root.innerHTML = '<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#F8FAFC;font-family:system-ui,-apple-system,sans-serif;padding:1.5rem;box-sizing:border-box;">' +
+                '<div style="max-width:440px;width:100%;background:#ffffff;border:1px solid #E2E8F0;border-radius:1rem;padding:2rem;box-shadow:0 10px 25px rgba(0,0,0,0.06);text-align:center;">' +
+                '<div style="width:52px;height:52px;margin:0 auto 1.25rem;background:#FEE2E2;border:1px solid #FECACA;border-radius:0.75rem;display:flex;align-items:center;justify-content:center;color:#DC2626;font-size:26px;font-weight:bold;">!</div>' +
+                '<h2 style="font-size:1.25rem;font-weight:800;color:#0F172A;margin:0 0 0.5rem 0;letter-spacing:-0.02em;">Application Initialization</h2>' +
+                '<p style="font-size:0.875rem;color:#475569;line-height:1.55;margin:0 0 1.25rem 0;">' + (message || 'Unable to start application interface.') + '</p>' +
+                (detail ? '<div style="background:#F1F5F9;border-radius:0.5rem;padding:0.75rem;font-size:0.75rem;color:#334155;font-family:monospace;text-align:left;overflow-x:auto;max-height:120px;margin-bottom:1.5rem;word-break:break-all;">' + detail + '</div>' : '') +
+                '<div style="display:flex;gap:0.75rem;justify-content:center;">' +
+                '<button onclick="window.location.reload()" style="background:#176B45;color:#ffffff;border:none;padding:0.625rem 1.25rem;border-radius:0.5rem;font-weight:600;font-size:0.875rem;cursor:pointer;">Reload Application</button>' +
+                '</div></div></div>';
+            }
+          } catch(e) {}
+        }
+
+        window.addEventListener('error', function(e) {
+          send({
+            kind: 'window_error',
+            message: e.message,
+            filename: e.filename,
+            lineno: e.lineno,
+            colno: e.colno,
+            stack: e.error ? e.error.stack : null
+          });
+          showFatalFallback('An error occurred during startup.', e.message || 'Script execution error');
+        });
+
+        window.addEventListener('unhandledrejection', function(event) {
+          if (event.reason && (
+            (typeof event.reason === 'string' && event.reason.includes('WebSocket')) ||
+            (event.reason.message && typeof event.reason.message === 'string' && event.reason.message.includes('WebSocket')) ||
+            (event.reason.toString && event.reason.toString().includes('WebSocket'))
+          )) {
+            event.preventDefault();
+            return;
+          }
+          send({
+            kind: 'unhandled_rejection',
+            reason: event.reason ? (event.reason.stack || event.reason.message || String(event.reason)) : null
+          });
+        });
+
+        // Intercept console.error to catch errors logged by React or libraries
+        var origConsoleError = console.error;
+        console.error = function() {
+          try {
+            var args = Array.prototype.slice.call(arguments);
+            var strArgs = args.map(function(a) {
+              if (a instanceof Error) return a.stack || a.message;
+              if (typeof a === 'object') {
+                try { return JSON.stringify(a); } catch(e) { return String(a); }
+              }
+              return String(a);
+            }).join(' ');
+            if (!strArgs.includes('[vite]') && !strArgs.includes('WebSocket')) {
+              send({ kind: 'console_error', text: strArgs });
+            }
+          } catch(e) {}
+          origConsoleError.apply(console, arguments);
+        };
+
+        send({ kind: 'script_init', time: Date.now(), href: window.location.href });
+      })();
+    </script>
+  </head>
+  <body style="margin:0;background-color:#F6F8FA;">
+    <div id="root">
+      <!-- Lightweight pre-hydration fallback: ensures zero blank screen while JavaScript loads -->
+      <div id="pre-hydration-loader" style="min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem;box-sizing:border-box;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#1F2937;">
+        <div style="width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,#176B45 0%,#0F5132 100%);color:#ffffff;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 25px rgba(15,81,50,0.25);margin-bottom:1.25rem;">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+            <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+          </svg>
+        </div>
+        <div style="text-align:center;">
+          <p style="font-size:1rem;font-weight:700;color:#000000;margin:0 0 0.75rem 0;letter-spacing:0.01em;">Please Wait</p>
+          <div style="display:flex;align-items:center;justify-content:center;gap:6px;">
+            <span style="width:8px;height:8px;border-radius:50%;background-color:#176B45;display:inline-block;animation:pulse-dot 1.2s infinite ease-in-out;animation-delay:-0.32s;"></span>
+            <span style="width:8px;height:8px;border-radius:50%;background-color:#176B45;display:inline-block;animation:pulse-dot 1.2s infinite ease-in-out;animation-delay:-0.16s;"></span>
+            <span style="width:8px;height:8px;border-radius:50%;background-color:#176B45;display:inline-block;animation:pulse-dot 1.2s infinite ease-in-out;"></span>
+          </div>
+        </div>
+      </div>
+      <style>
+        @keyframes pulse-dot {
+          0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+          40% { transform: scale(1); opacity: 1; }
+        }
+      </style>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
